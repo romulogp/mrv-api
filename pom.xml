@@ -47,12 +47,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- PostgreSQL -->
-		<!--<dependency>-->
-			<!--<groupId>org.postgresql</groupId>-->
-			<!--<artifactId>postgresql</artifactId>-->
-			<!--<scope>runtime</scope>-->
-		<!--</dependency>-->
 		<!-- MySQL -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -97,6 +91,7 @@
 			<groupId>org.springframework.security.oauth</groupId>
 			<artifactId>spring-security-oauth2</artifactId>
 		</dependency>
+
         <!-- JWT -->
         <dependency>
             <groupId>org.springframework.security</groupId>
