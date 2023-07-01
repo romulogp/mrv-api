@@ -2,7 +2,6 @@ package br.com.okfx.mrv.api.resource;
 
 import br.com.okfx.mrv.api.event.RecursoCriadoEvent;
 import br.com.okfx.mrv.api.model.BaseLegal;
-import br.com.okfx.mrv.api.repository.BaseLegalRepository;
 import br.com.okfx.mrv.api.repository.filter.BaseLegalFilter;
 import br.com.okfx.mrv.api.service.BaseLegalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +10,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/baseLegal")
@@ -35,7 +32,7 @@ public class BaseLegalResource {
         return service.listarTodos();
     }
 
-    @GetMapping("/{codig}")
+    @GetMapping("/{codigo}")
     public ResponseEntity<BaseLegal> buscarPeloCodigo(@PathVariable Long codigo) {
         BaseLegal baseLegal = service.buscarPorCodigo(codigo).get();
         return baseLegal != null ? ResponseEntity.ok().body(baseLegal) : ResponseEntity.notFound().build();

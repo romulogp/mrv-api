@@ -28,11 +28,11 @@ public class BaseLegalService {
     }
 
     public Optional<BaseLegal> buscarPorCodigo(Long codigo) {
-        Optional<BaseLegal> pessoa = Optional.ofNullable(repository.findOne(codigo));
-        if (!pessoa.isPresent()) {
+        Optional<BaseLegal> baseLegal = Optional.ofNullable(repository.findOne(codigo));
+        if (!baseLegal.isPresent()) {
             throw new EmptyResultDataAccessException(1);
         }
-        return pessoa;
+        return baseLegal;
     }
 
     public BaseLegal salvar(BaseLegal baseLegal) {
