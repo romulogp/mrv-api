@@ -27,8 +27,8 @@ public class BaseLegalService {
         return repository.filtrar(baseLegalFilter, pageable);
     }
 
-    public Optional<BaseLegal> buscarPorCodigo(Long codigo) {
-        Optional<BaseLegal> baseLegal = Optional.ofNullable(repository.findOne(codigo));
+    public Optional<BaseLegal> buscarPorId(Long id) {
+        Optional<BaseLegal> baseLegal = Optional.ofNullable(repository.findOne(id));
         if (!baseLegal.isPresent()) {
             throw new EmptyResultDataAccessException(1);
         }
@@ -39,15 +39,15 @@ public class BaseLegalService {
         return repository.save(baseLegal);
     }
 
-    public BaseLegal atualizar(Long codigo, BaseLegal baseLegal) {
-        BaseLegal baseLegalSalvo = buscarPorCodigo(codigo).orElseThrow(() -> new BaseLegalInexistente());
-        BeanUtils.copyProperties(baseLegal,baseLegalSalvo,"codigo");
+    public BaseLegal atualizar(Long id, BaseLegal baseLegal) {
+        BaseLegal baseLegalSalvo = buscarPorId(id).orElseThrow(() -> new BaseLegalInexistente());
+        BeanUtils.copyProperties(baseLegal, baseLegalSalvo, "id");
 
         return repository.save(baseLegalSalvo);
     }
 
-    public void apagar(Long codigo) {
-        repository.delete(codigo);
+    public void apagar(Long id) {
+        repository.delete(id);
     }
 
 

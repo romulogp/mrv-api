@@ -27,13 +27,13 @@ public class BaseLegalResource {
     private ApplicationEventPublisher publisher;
 
     @GetMapping
-    public List<BaseLegal> listar(){
+    public List<BaseLegal> listar() {
         return service.listarTodos();
     }
 
-    @GetMapping("/{codigo}")
-    public ResponseEntity<BaseLegal> buscarPeloCodigo(@PathVariable Long codigo) {
-        BaseLegal baseLegal = service.buscarPorCodigo(codigo).get();
+    @GetMapping("/{id}")
+    public ResponseEntity<BaseLegal> buscarPeloCodigo(@PathVariable Long id) {
+        BaseLegal baseLegal = service.buscarPorId(id).get();
         return baseLegal != null ? ResponseEntity.ok().body(baseLegal) : ResponseEntity.notFound().build();
     }
 
@@ -43,22 +43,22 @@ public class BaseLegalResource {
     }
 
     @PostMapping
-    public ResponseEntity<BaseLegal> criar(@Valid @RequestBody BaseLegal baseLegal, HttpServletResponse response){
+    public ResponseEntity<BaseLegal> criar(@Valid @RequestBody BaseLegal baseLegal, HttpServletResponse response) {
         BaseLegal baseLegalSalvo = service.salvar(baseLegal);
-        publisher.publishEvent((new RecursoCriadoEvent(this,response, baseLegalSalvo.getId())));
+        publisher.publishEvent((new RecursoCriadoEvent(this, response, baseLegalSalvo.getId())));
         return ResponseEntity.status(HttpStatus.CREATED).body(baseLegalSalvo);
     }
 
-    @PutMapping("/{codigo}")
-    public ResponseEntity<BaseLegal> atualizar(@PathVariable Long codigo, @Valid @RequestBody BaseLegal baseLegal) {
-        BaseLegal baseLegalSalva = service.atualizar(codigo, baseLegal);
+    @PutMapping("/{id}")
+    public ResponseEntity<BaseLegal> atualizar(@PathVariable Long id, @Valid @RequestBody BaseLegal baseLegal) {
+        BaseLegal baseLegalSalva = service.atualizar(id, baseLegal);
         return ResponseEntity.ok(baseLegalSalva);
     }
 
-    @DeleteMapping("/{codigo}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> remover(@PathVariable Long codigo){
-        service.apagar(codigo);
+    public ResponseEntity<Void> remover(@PathVariable Long id) {
+        service.apagar(id);
         return ResponseEntity.noContent().build();
     }
 }
