@@ -27,13 +27,13 @@ public class NaturezaResource {
     private ApplicationEventPublisher publisher;
 
     @GetMapping
-    public List<Natureza> listar(){
+    public List<Natureza> listar() {
         return service.listarTodos();
     }
 
-    @GetMapping("/{codigo}")
-    public ResponseEntity<Natureza> buscarPeloCodigo(@PathVariable Long codigo) {
-        Natureza natureza = service.buscarPorCodigo(codigo).get();
+    @GetMapping("/{id}")
+    public ResponseEntity<Natureza> buscarPeloId(@PathVariable Long id) {
+        Natureza natureza = service.buscarPorId(id).get();
         return natureza != null ? ResponseEntity.ok().body(natureza) : ResponseEntity.notFound().build();
     }
 
@@ -43,22 +43,22 @@ public class NaturezaResource {
     }
 
     @PostMapping
-    public ResponseEntity<Natureza> criar(@Valid @RequestBody Natureza natureza, HttpServletResponse response){
+    public ResponseEntity<Natureza> criar(@Valid @RequestBody Natureza natureza, HttpServletResponse response) {
         Natureza naturezaSalva = service.salvar(natureza);
-        publisher.publishEvent((new RecursoCriadoEvent(this,response, naturezaSalva.getId())));
+        publisher.publishEvent((new RecursoCriadoEvent(this, response, naturezaSalva.getId())));
         return ResponseEntity.status(HttpStatus.CREATED).body(naturezaSalva);
     }
 
-    @PutMapping("/{codigo}")
-    public ResponseEntity<Natureza> atualizar(@PathVariable Long codigo, @Valid @RequestBody Natureza natureza) {
-        Natureza naturezaSalva = service.atualizar(codigo, natureza);
+    @PutMapping("/{id}")
+    public ResponseEntity<Natureza> atualizar(@PathVariable Long id, @Valid @RequestBody Natureza natureza) {
+        Natureza naturezaSalva = service.atualizar(id, natureza);
         return ResponseEntity.ok(naturezaSalva);
     }
 
-    @DeleteMapping("/{codigo}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> remover(@PathVariable Long codigo){
-        service.apagar(codigo);
+    public ResponseEntity<Void> remover(@PathVariable Long id) {
+        service.apagar(id);
         return ResponseEntity.noContent().build();
     }
 }
