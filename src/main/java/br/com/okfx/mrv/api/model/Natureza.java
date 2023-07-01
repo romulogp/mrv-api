@@ -15,6 +15,7 @@ public class Natureza implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotNull
     @Size(min = 10, max = 255)
     private String nome;
