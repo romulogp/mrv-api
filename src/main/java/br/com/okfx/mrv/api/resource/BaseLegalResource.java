@@ -26,7 +26,6 @@ public class BaseLegalResource {
     @Autowired
     private ApplicationEventPublisher publisher;
 
-
     @GetMapping
     public List<BaseLegal> listar(){
         return service.listarTodos();
@@ -56,14 +55,10 @@ public class BaseLegalResource {
         return ResponseEntity.ok(baseLegalSalva);
     }
 
-
     @DeleteMapping("/{codigo}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> remover(@PathVariable Long codigo){
         service.apagar(codigo);
         return ResponseEntity.noContent().build();
     }
-
-
-
 }

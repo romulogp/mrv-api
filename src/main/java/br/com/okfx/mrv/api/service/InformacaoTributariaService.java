@@ -49,6 +49,4 @@ public class InformacaoTributariaService {
     public void apagar(Long codigo) {
         repository.delete(codigo);
     }
-
-
 }

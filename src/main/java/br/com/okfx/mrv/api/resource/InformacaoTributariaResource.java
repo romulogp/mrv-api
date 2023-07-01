@@ -26,7 +26,6 @@ public class InformacaoTributariaResource {
     @Autowired
     private ApplicationEventPublisher publisher;
 
-
     @GetMapping
     public List<InformacaoTributaria> listar(){
         return service.listarTodos();
@@ -56,14 +55,10 @@ public class InformacaoTributariaResource {
         return ResponseEntity.ok(informacaoTributariaSalva);
     }
 
-
     @DeleteMapping("/{codigo}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> remover(@PathVariable Long codigo){
         service.apagar(codigo);
         return ResponseEntity.noContent().build();
     }
-
-
-
 }
