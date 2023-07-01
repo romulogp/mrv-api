@@ -23,9 +23,9 @@ public class InformacaoTributariaRepositoryImpl implements InformacaoTributariaR
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<InformacaoTributaria> criteria = builder.createQuery(InformacaoTributaria.class);
         Root<InformacaoTributaria> root = criteria.from(InformacaoTributaria.class);
-        From<? ,? > naturezaJoin = root.join("natureza",JoinType.INNER);
+        From<?, ?> naturezaJoin = root.join("natureza", JoinType.INNER);
 
-        Predicate[] predicates = criarRestricoes(informacaoTributariaFilter, builder, root,naturezaJoin);
+        Predicate[] predicates = criarRestricoes(informacaoTributariaFilter, builder, root, naturezaJoin);
         criteria.where(predicates);
 
         TypedQuery<InformacaoTributaria> query = manager.createQuery(criteria);
@@ -62,7 +62,7 @@ public class InformacaoTributariaRepositoryImpl implements InformacaoTributariaR
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
         Root<InformacaoTributaria> root = criteria.from(InformacaoTributaria.class);
-        From<? ,? > naturezaJoin = root.join("natureza",JoinType.INNER);
+        From<?, ?> naturezaJoin = root.join("natureza", JoinType.INNER);
 
         Predicate[] predicates = criarRestricoes(informacaoTributariaFilter, builder, root, naturezaJoin);
         criteria.where(predicates);
