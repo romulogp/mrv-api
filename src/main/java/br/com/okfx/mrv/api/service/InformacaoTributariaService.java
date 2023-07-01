@@ -27,8 +27,8 @@ public class InformacaoTributariaService {
         return repository.filtrar(informacaoTributariaFilter, pageable);
     }
 
-    public Optional<InformacaoTributaria> buscarPorCodigo(Long codigo) {
-        Optional<InformacaoTributaria> informacaoTributaria = Optional.ofNullable(repository.findOne(codigo));
+    public Optional<InformacaoTributaria> buscarPorId(Long id) {
+        Optional<InformacaoTributaria> informacaoTributaria = Optional.ofNullable(repository.findOne(id));
         if (!informacaoTributaria.isPresent()) {
             throw new EmptyResultDataAccessException(1);
         }
@@ -39,14 +39,14 @@ public class InformacaoTributariaService {
         return repository.save(informacaoTributaria);
     }
 
-    public InformacaoTributaria atualizar(Long codigo, InformacaoTributaria informacaoTributaria) {
-        InformacaoTributaria informacaoTributariaSalvo = buscarPorCodigo(codigo).orElseThrow(() -> new InformacaoTributariaInexistente());
-        BeanUtils.copyProperties(informacaoTributaria,informacaoTributariaSalvo,"codigo");
+    public InformacaoTributaria atualizar(Long id, InformacaoTributaria informacaoTributaria) {
+        InformacaoTributaria informacaoTributariaSalvo = buscarPorId(id).orElseThrow(() -> new InformacaoTributariaInexistente());
+        BeanUtils.copyProperties(informacaoTributaria, informacaoTributariaSalvo, "id");
 
         return repository.save(informacaoTributariaSalvo);
     }
 
-    public void apagar(Long codigo) {
-        repository.delete(codigo);
+    public void apagar(Long id) {
+        repository.delete(id);
     }
 }

@@ -27,13 +27,13 @@ public class InformacaoTributariaResource {
     private ApplicationEventPublisher publisher;
 
     @GetMapping
-    public List<InformacaoTributaria> listar(){
+    public List<InformacaoTributaria> listar() {
         return service.listarTodos();
     }
 
-    @GetMapping("/{codigo}")
-    public ResponseEntity<InformacaoTributaria> buscarPeloCodigo(@PathVariable Long codigo) {
-        InformacaoTributaria informacaoTributaria = service.buscarPorCodigo(codigo).get();
+    @GetMapping("/{id}")
+    public ResponseEntity<InformacaoTributaria> buscarPeloId(@PathVariable Long id) {
+        InformacaoTributaria informacaoTributaria = service.buscarPorId(id).get();
         return informacaoTributaria != null ? ResponseEntity.ok().body(informacaoTributaria) : ResponseEntity.notFound().build();
     }
 
@@ -43,22 +43,22 @@ public class InformacaoTributariaResource {
     }
 
     @PostMapping
-    public ResponseEntity<InformacaoTributaria> criar(@Valid @RequestBody InformacaoTributaria informacaoTributaria, HttpServletResponse response){
+    public ResponseEntity<InformacaoTributaria> criar(@Valid @RequestBody InformacaoTributaria informacaoTributaria, HttpServletResponse response) {
         InformacaoTributaria informacaoTributariaSalvo = service.salvar(informacaoTributaria);
-        publisher.publishEvent((new RecursoCriadoEvent(this,response, informacaoTributariaSalvo.getId())));
+        publisher.publishEvent((new RecursoCriadoEvent(this, response, informacaoTributariaSalvo.getId())));
         return ResponseEntity.status(HttpStatus.CREATED).body(informacaoTributariaSalvo);
     }
 
-    @PutMapping("/{codigo}")
-    public ResponseEntity<InformacaoTributaria> atualizar(@PathVariable Long codigo, @Valid @RequestBody InformacaoTributaria informacaoTributaria) {
-        InformacaoTributaria informacaoTributariaSalva = service.atualizar(codigo, informacaoTributaria);
+    @PutMapping("/{id}")
+    public ResponseEntity<InformacaoTributaria> atualizar(@PathVariable Long id, @Valid @RequestBody InformacaoTributaria informacaoTributaria) {
+        InformacaoTributaria informacaoTributariaSalva = service.atualizar(id, informacaoTributaria);
         return ResponseEntity.ok(informacaoTributariaSalva);
     }
 
-    @DeleteMapping("/{codigo}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> remover(@PathVariable Long codigo){
-        service.apagar(codigo);
+    public ResponseEntity<Void> remover(@PathVariable Long id) {
+        service.apagar(id);
         return ResponseEntity.noContent().build();
     }
 }
