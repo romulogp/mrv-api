@@ -14,16 +14,17 @@ public class Retencao implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotNull
     @Size(max = 45)
     private String aliquota;
+
     @Size(min = 5, max = 45)
     @NotNull
     @Column(name = "fato_gerador")
     private String fatoGerador;
 
     @Size(max = 255)
-    @Null
     private String observacao;
 
     public Long getId() {
