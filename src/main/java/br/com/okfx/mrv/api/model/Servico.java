@@ -4,7 +4,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,7 +16,7 @@ public class Servico implements Serializable {
     private Long id;
 
     @NotNull
-    @Size(max = 45, min =3)
+    @Size(max = 45, min = 3)
     private String codigo;
 
     @NotNull
@@ -26,9 +25,6 @@ public class Servico implements Serializable {
     @NotNull
     @Column(name = "informacao_geral")
     private String informacaoGeral;
-
-    @ManyToMany(mappedBy="tributo")
-    private List<Tributo> tributos;
 
     public Long getId() {
         return id;
@@ -60,14 +56,6 @@ public class Servico implements Serializable {
 
     public void setInformacaoGeral(String informacaoGeral) {
         this.informacaoGeral = informacaoGeral;
-    }
-
-    public List<Tributo> getTributos() {
-        return tributos;
-    }
-
-    public void setTributos(List<Tributo> tributos) {
-        this.tributos = tributos;
     }
 
     @Override
