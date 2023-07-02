@@ -38,9 +38,9 @@ public class Tributo implements Serializable {
     private Retencao retencao;
 
     @ManyToMany
-    @JoinTable(name="servico_tributo", joinColumns=
-            {@JoinColumn(name="tributo_id")}, inverseJoinColumns=
-            {@JoinColumn(name="servico_id")})
+    @JoinTable(name = "servico_tributo", joinColumns =
+            {@JoinColumn(name = "tributo_id")}, inverseJoinColumns =
+            {@JoinColumn(name = "servico_id")})
     private List<Servico> servicos;
 
     public Long getId() {
