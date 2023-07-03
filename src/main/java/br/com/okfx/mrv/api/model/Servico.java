@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -25,6 +26,12 @@ public class Servico implements Serializable {
     @NotNull
     @Column(name = "informacao_geral")
     private String informacaoGeral;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "servico_tributo", joinColumns =
+            {@JoinColumn(name = "tributo_id")}, inverseJoinColumns =
+            {@JoinColumn(name = "servico_id")})
+    private List<Tributo> tributos;
 
     public Long getId() {
         return id;
@@ -56,6 +63,14 @@ public class Servico implements Serializable {
 
     public void setInformacaoGeral(String informacaoGeral) {
         this.informacaoGeral = informacaoGeral;
+    }
+
+    public List<Tributo> getTributos() {
+        return tributos;
+    }
+
+    public void setTributos(List<Tributo> tributos) {
+        this.tributos = tributos;
     }
 
     @Override
