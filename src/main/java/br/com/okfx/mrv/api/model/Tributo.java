@@ -37,12 +37,6 @@ public class Tributo implements Serializable {
     @JoinColumn(name = "retencao_id")
     private Retencao retencao;
 
-    @ManyToMany
-    @JoinTable(name = "servico_tributo", joinColumns =
-            {@JoinColumn(name = "tributo_id")}, inverseJoinColumns =
-            {@JoinColumn(name = "servico_id")})
-    private List<Servico> servicos;
-
     public Long getId() {
         return id;
     }
@@ -89,14 +83,6 @@ public class Tributo implements Serializable {
 
     public void setRetencao(Retencao retencao) {
         this.retencao = retencao;
-    }
-
-    public List<Servico> getServicos() {
-        return servicos;
-    }
-
-    public void setServicos(List<Servico> servicos) {
-        this.servicos = servicos;
     }
 
     @Override
